@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>scary monster</title>
+    <link rel="stylesheet" href="inicio.css">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <div class="logo-img">
+                    <img src="scray monster.jpeg" alt="AnonBoard Logo" id="logoImage" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="logo-fallback" style="display: none;">▶</div>
+                </div>
+                <h1>Scary<span class="highlight">ghost</span></h1>
+            </div>
+            <div class="header-links">
+                <a href="#" class="active" data-page="home">[ home ]</a>
+                <a href="#" data-page="forum">[ forum ]</a>
+                <a href="#" data-page="wiki">[ wiki ]</a>
+                <a href="#" data-page="archive">[ archive ]</a>
+            </div>
+            <div class="header-status">
+                <span id="visitorCount">👥 0 visitantes</span>
+                <span id="postCount">📝 0 posts</span>
+            </div>
+        </header>
+
+        <main class="main-content" id="mainContent">
+            <div class="page active" id="homePage">
+                <div class="welcome-box">
+                    <h2>📢 BEM-VINDO AO ANONBOARD</h2>
+                    <p>Um espaço livre para compartilhar conhecimento, ideias e conversas. Totalmente anônimo.</p>
+                    <p>Não precisa de cadastro. Basta postar.</p>
+                    <div class="rules">
+                        <h3>📜 REGRAS BÁSICAS:</h3>
+                        <ul>
+                            <li>✔️ Seja respeitoso (mesmo no anonimato)</li>
+                            <li>✔️ Não poste conteúdo ilegal</li>
+                            <li>✔️ Conteúdo enciclopédico é bem-vindo na Wiki</li>
+                            <li>✔️ Use os boards apropriados</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="stats-box">
+                    <div class="stat">
+                        <span class="stat-number" id="statPosts">0</span>
+                        <span class="stat-label">posts totais</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number" id="statThreads">0</span>
+                        <span class="stat-label">tópicos</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number" id="statWiki">0</span>
+                        <span class="stat-label">artigos wiki</span>
+                    </div>
+                </div>
+                <div class="boards-grid">
+                    <div class="board-card" data-board="his">
+                        <div class="board-icon">📜</div>
+                        <div class="board-name">/his/ - História</div>
+                        <div class="board-desc">Discussões sobre história, civilizações e eventos marcantes</div>
+                        <div class="board-stats" id="boardStatsHis">0 tópicos</div>
+                    </div>
+                    <div class="board-card" data-board="b">
+                        <div class="board-icon">💬</div>
+                        <div class="board-name">/b/ - Aleatório</div>
+                        <div class="board-desc">Qualquer assunto, conversas livres</div>
+                        <div class="board-stats" id="boardStatsB">0 tópicos</div>
+                    </div>
+                    <div class="board-card" data-board="tech">
+                        <div class="board-icon">💻</div>
+                        <div class="board-name">/tech/ - Tecnologia</div>
+                        <div class="board-desc">Programação, hardware, inovações</div>
+                        <div class="board-stats" id="boardStatsTech">0 tópicos</div>
+                    </div>
+                    <div class="board-card" data-board="lit">
+                        <div class="board-icon">📚</div>
+                        <div class="board-name">/lit/ - Literatura</div>
+                        <div class="board-desc">Livros, autores, poesia</div>
+                        <div class="board-stats" id="boardStatsLit">0 tópicos</div>
+                    </div>
+                    <div class="board-card" data-board="art">
+                        <div class="board-icon">🎨</div>
+                        <div class="board-name">/art/ - Arte</div>
+                        <div class="board-desc">Desenhos, pinturas, artes visuais</div>
+                        <div class="board-stats" id="boardStatsArt">0 tópicos</div>
+                    </div>
+                    <div class="board-card" data-board="wiki">
+                        <div class="board-icon">📖</div>
+                        <div class="board-name">/wiki/ - Enciclopédia</div>
+                        <div class="board-desc">Conhecimento coletivo, artigos colaborativos</div>
+                        <div class="board-stats" id="boardStatsWiki">0 artigos</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PÁGINA FORUM (lista de tópicos) -->
+            <div class="page" id="forumPage">
+                <div class="forum-header">
+                    <h2 id="forumTitle">/his/ - História</h2>
+                    <button class="new-thread-btn" id="newThreadBtn">+ NOVO TÓPICO</button>
+                </div>
+                <div class="thread-list" id="threadList">
+                    <div class="loading">Carregando tópicos...</div>
+                </div>
+            </div>
+
+            <div class="page" id="wikiPage">
+                <div class="wiki-header">
+                    <h2>📖 Enciclopédia Colaborativa</h2>
+                    <button class="new-article-btn" id="newArticleBtn">+ NOVO ARTIGO</button>
+                </div>
+                <div class="wiki-search">
+                    <input type="text" id="wikiSearch" placeholder="Pesquisar artigos...">
+                    <button id="wikiSearchBtn">🔍</button>
+                </div>
+                <div class="article-list" id="articleList">
+                    <div class="loading">Carregando artigos...</div>
+                </div>
+            </div>
+
+            <div class="page" id="archivePage">
+                <h2>📦 Arquivo de Tópicos</h2>
+                <div class="archive-list" id="archiveList"></div>
+            </div>
+        </main>
+
+        <aside class="sidebar">
+            <div class="sidebar-box">
+                <h3>📌 POSTAR AGORA</h3>
+                <div class="quick-post">
+                    <select id="quickBoardSelect">
+                        <option value="his">/his/ - História</option>
+                        <option value="b">/b/ - Aleatório</option>
+                        <option value="tech">/tech/ - Tecnologia</option>
+                        <option value="lit">/lit/ - Literatura</option>
+                        <option value="art">/art/ - Arte</option>
+                        <option value="wiki">/wiki/ - Enciclopédia</option>
+                    </select>
+                    <input type="text" id="quickName" placeholder="Nome (opcional, anônimo)">
+                    <textarea id="quickContent" placeholder="Digite sua mensagem..." rows="3"></textarea>
+                    <button id="quickPostBtn">📤 POSTAR</button>
+                </div>
+            </div>
+            <div class="sidebar-box">
+                <h3>🔥 TÓPICOS EM ALTA</h3>
+                <div id="trendingList" class="trending-list">
+                    <div class="trending-placeholder">Nenhum tópico em alta</div>
+                </div>
+            </div>
+            <div class="sidebar-box">
+                <h3>📊 ESTATÍSTICAS</h3>
+                <div class="stats-sidebar">
+                    <div>👥 Visitantes: <span id="sidebarVisitors">0</span></div>
+                    <div>📝 Posts: <span id="sidebarPosts">0</span></div>
+                    <div>📚 Artigos Wiki: <span id="sidebarWiki">0</span></div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- MODAL DE NOVO TÓPICO -->
+        <div class="modal" id="newThreadModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>➕ NOVO TÓPICO</h3>
+                    <button class="modal-close" id="closeThreadModal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Título</label>
+                        <input type="text" id="threadTitle" placeholder="Título do tópico">
+                    </div>
+                    <div class="form-group">
+                        <label>Nome (opcional)</label>
+                        <input type="text" id="threadName" placeholder="Deixe em branco para anônimo">
+                    </div>
+                    <div class="form-group">
+                        <label>Mensagem</label>
+                        <textarea id="threadContent" rows="5" placeholder="Digite sua mensagem..."></textarea>
+                    </div>
+                    <button class="submit-btn" id="submitThreadBtn">CRIAR TÓPICO</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODAL DE NOVO ARTIGO WIKI -->
+        <div class="modal" id="newArticleModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>📖 NOVO ARTIGO WIKI</h3>
+                    <button class="modal-close" id="closeArticleModal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Título do artigo</label>
+                        <input type="text" id="articleTitle" placeholder="Título">
+                    </div>
+                    <div class="form-group">
+                        <label>Categoria</label>
+                        <select id="articleCategory">
+                            <option value="historia">História</option>
+                            <option value="tecnologia">Tecnologia</option>
+                            <option value="ciencia">Ciência</option>
+                            <option value="arte">Arte</option>
+                            <option value="literatura">Literatura</option>
+                            <option value="geral">Geral</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Conteúdo</label>
+                        <textarea id="articleContent" rows="8" placeholder="Digite o conteúdo do artigo..."></textarea>
+                    </div>
+                    <button class="submit-btn" id="submitArticleBtn">PUBLICAR ARTIGO</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODAL DE VISUALIZAÇÃO DE TÓPICO -->
+        <div class="modal" id="threadModal">
+            <div class="modal-content thread-modal">
+                <div class="modal-header">
+                    <h3 id="threadModalTitle">Tópico</h3>
+                    <button class="modal-close" id="closeThreadViewModal">&times;</button>
+                </div>
+                <div class="modal-body" id="threadModalContent"></div>
+                <div class="reply-section">
+                    <textarea id="replyContent" placeholder="Escreva sua resposta..." rows="3"></textarea>
+                    <input type="text" id="replyName" placeholder="Nome (opcional)">
+                    <button id="submitReplyBtn">RESPONDER</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODAL DE VISUALIZAÇÃO DE ARTIGO WIKI -->
+        <div class="modal" id="articleViewModal">
+            <div class="modal-content article-modal">
+                <div class="modal-header">
+                    <h3 id="articleViewTitle">Artigo</h3>
+                    <button class="modal-close" id="closeArticleViewModal">&times;</button>
+                </div>
+                <div class="modal-body" id="articleViewContent"></div>
+                <div class="edit-section">
+                    <button id="editArticleBtn" class="edit-btn">✏️ EDITAR ARTIGO</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal" id="editArticleModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>✏️ EDITAR ARTIGO</h3>
+                    <button class="modal-close" id="closeEditArticleModal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Título</label>
+                        <input type="text" id="editArticleTitle">
+                    </div>
+                    <div class="form-group">
+                        <label>Categoria</label>
+                        <select id="editArticleCategory"></select>
+                    </div>
+                    <div class="form-group">
+                        <label>Conteúdo</label>
+                        <textarea id="editArticleContent" rows="10"></textarea>
+                    </div>
+                    <button class="submit-btn" id="saveArticleEditBtn">SALVAR ALTERAÇÕES</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="inicio.js"></script>
+</body>
+</html>
